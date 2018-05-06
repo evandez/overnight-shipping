@@ -62,12 +62,9 @@ for i in road_map.keys():
 
 city_list = list(road_map.keys())
 city_list.sort()
-csv_text = ',' + ','.join(city_list) + '\n'
+csv_text = ',' + ','.join([(fixed[city] if city in fixed else city) for city in city_list]) + '\n'
 for i in city_list:
-    if i in fixed:
-        i = fixed[i]
-
-    csv_text += i + ','
+    csv_text += (fixed[i] if i in fixed else i) + ','
     for j in city_list:
         dist = 1e12
         if i in dist_matrix and j in dist_matrix[i]:
